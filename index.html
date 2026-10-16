@@ -160,83 +160,45 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_BPSEnrollment_2_0(feature) {
-            if (feature.properties['JOIN_COUNT'] >= 1.000000 && feature.properties['JOIN_COUNT'] <= 5.000000 ) {
-                return {
-                pane: 'pane_BPSEnrollment_2',
-                opacity: 1,
-                color: 'rgba(247,247,247,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(247,251,255,1.0)',
-                interactive: false,
-            }
-            }
-            if (feature.properties['JOIN_COUNT'] >= 5.000000 && feature.properties['JOIN_COUNT'] <= 25.000000 ) {
-                return {
-                pane: 'pane_BPSEnrollment_2',
-                opacity: 1,
-                color: 'rgba(247,247,247,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(200,221,240,1.0)',
-                interactive: false,
-            }
-            }
-            if (feature.properties['JOIN_COUNT'] >= 25.000000 && feature.properties['JOIN_COUNT'] <= 80.000000 ) {
-                return {
-                pane: 'pane_BPSEnrollment_2',
-                opacity: 1,
-                color: 'rgba(247,247,247,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,254,219,1.0)',
-                interactive: false,
-            }
-            }
-            if (feature.properties['JOIN_COUNT'] >= 80.000000 && feature.properties['JOIN_COUNT'] <= 140.000000 ) {
-                return {
-                pane: 'pane_BPSEnrollment_2',
-                opacity: 1,
-                color: 'rgba(247,247,247,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,162,78,1.0)',
-                interactive: false,
-            }
-            }
-            if (feature.properties['JOIN_COUNT'] >= 140.000000 && feature.properties['JOIN_COUNT'] <= 415.000000 ) {
-                return {
-                pane: 'pane_BPSEnrollment_2',
-                opacity: 1,
-                color: 'rgba(247,247,247,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(228,26,28,1.0)',
-                interactive: false,
-            }
-            }
-        }
+		function style_BPSEnrollment_2_0(feature) {
+		    var rawCount = feature.properties['JOIN_COUNT'];
+		    var count = (rawCount === '' || rawCount === null || rawCount === undefined)
+		        ? NaN
+		        : Number(rawCount);
+		
+		    var fillColor;
+		
+		    if (!Number.isFinite(count)) {
+		        // Suppressed or missing count: neutral fill, no inferred category.
+		        fillColor = 'rgba(235,235,235,1.0)';
+		    } else if (count < 5) {
+		        fillColor = 'rgba(247,251,255,1.0)';
+		    } else if (count < 25) {
+		        fillColor = 'rgba(200,221,240,1.0)';
+		    } else if (count < 80) {
+		        fillColor = 'rgba(255,254,219,1.0)';
+		    } else if (count < 140) {
+		        fillColor = 'rgba(251,162,78,1.0)';
+		    } else {
+		        // Includes counts of 140 and above, including values above 415.
+		        fillColor = 'rgba(228,26,28,1.0)';
+		    }
+		
+		    return {
+		        pane: 'pane_BPSEnrollment_2',
+		        opacity: 1,
+		        color: 'rgba(247,247,247,1.0)',
+		        dashArray: '',
+		        lineCap: 'butt',
+		        lineJoin: 'miter',
+		        weight: 1.0,
+		        fill: true,
+		        fillOpacity: 1,
+		        fillColor: fillColor,
+		        interactive: false
+		    };
+		}
+
         map.createPane('pane_BPSEnrollment_2');
         map.getPane('pane_BPSEnrollment_2').style.zIndex = 402;
         map.getPane('pane_BPSEnrollment_2').style['mix-blend-mode'] = 'normal';
@@ -353,7 +315,7 @@
                 interactive: true,
             }
                     break;
-                case 'Elementary ':
+                case 'Elementary':
                     return {
                 pane: 'pane_BPSSchoolLocation_3',
                 radius: 6.4,
@@ -409,7 +371,7 @@
         map.addLayer(layer_BPSSchoolLocation_3);
         var overlaysTree = [
             {label: 'BPS School Location<br /><table><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_ELC0.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Elementary1.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Secondary2.png" /></td><td>Secondary</td></tr></table>', layer: layer_BPSSchoolLocation_3},
-            {label: 'BPS Enrollment <br /><table><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_50.png" /></td><td><5</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_5251.png" /></td><td>5-25</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_25802.png" /></td><td>25-80</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_801403.png" /></td><td>80-140</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_1404.png" /></td><td>>140</td></tr></table>', layer: layer_BPSEnrollment_2},
+            {label: 'BPS Enrollment <br /><table><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_50.png" /></td><td><5</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_5251.png" /></td><td>5-24</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_25802.png" /></td><td>25-79</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_801403.png" /></td><td>80-139</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_1404.png" /></td><td>>140</td></tr></table>', layer: layer_BPSEnrollment_2},
             {label: "Base Map", layer: layer_BaseMap_1},
             {label: " Satellite Image", layer: layer_SatelliteImage_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
