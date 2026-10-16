@@ -88,6 +88,19 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
+        map.createPane('pane_SatelliteImage_0');
+        map.getPane('pane_SatelliteImage_0').style.zIndex = 400;
+        var layer_SatelliteImage_0 = L.tileLayer('https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.webp?sku=101S0AiAdllT3&access_token=pk.eyJ1Ijoiam9uY2hlbWxhIiwiYSI6IjdXUzRocmsifQ.acEmRifqE4Bh2Xz-IY_4Bw', {
+            pane: 'pane_SatelliteImage_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.maxar.com/">Maxar</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_SatelliteImage_0;
+        map.addLayer(layer_SatelliteImage_0);
         map.createPane('pane_BaseMap_1');
         map.getPane('pane_BaseMap_1').style.zIndex = 401;
         var layer_BaseMap_1 = L.tileLayer('https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_4emy_1_9b4cda09985562bfe6dcc8e4', {
@@ -395,9 +408,9 @@
         bounds_group.addLayer(layer_BPSSchoolLocation_3);
         map.addLayer(layer_BPSSchoolLocation_3);
         var overlaysTree = [
-    		{label: 'BPS School Location<br /><table><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_ELC0.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Elementary1.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Secondary2.png" /></td><td>Secondary</td></tr></table>', layer: layer_BPSSchoolLocation_3},
-		    {label: 'BPS Enrollment <br /><table><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_50.png" /></td><td><5</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_5251.png" /></td><td>5-25</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_25802.png" /></td><td>25-80</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_801403.png" /></td><td>80-140</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_1404.png" /></td><td>>140</td></tr></table>', layer: layer_BPSEnrollment_2},
-		    {label: 'Base Map', layer: layer_BaseMap_1}];
+            {label: 'BPS School Location<br /><table><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_ELC0.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Elementary1.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Secondary2.png" /></td><td>Secondary</td></tr></table>', layer: layer_BPSSchoolLocation_3},
+            {label: 'BPS Enrollment <br /><table><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_50.png" /></td><td><5</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_5251.png" /></td><td>5-25</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_25802.png" /></td><td>25-80</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_801403.png" /></td><td>80-140</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_1404.png" /></td><td>>140</td></tr></table>', layer: layer_BPSEnrollment_2},
+            {label: "Base Map", layer: layer_BaseMap_1},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
             //selectorBack: false,
