@@ -13,21 +13,56 @@ concurrency:
 
 jobs:
   refresh:
-    name: Refresh map
+    name: Refresh map data
     runs-on: ubuntu-latest
+
+    env:
+      SCHOOLS_CSV: /tmp/schools_list.csv
+      HEATMAP_CSV: /tmp/heatmap_data.csv
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
 
-      - name: Confirm workflow started
+      - name: Download published CSV feeds
         run: |
-          echo "Map refresh workflow started."
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Branch: $GITHUB_REF_NAME"
+          curl --fail --silent --show-error --location \
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGmt0fPRbGXeOcd9T14KEDGDE-YUijbDmq9eI0md-eUeRyi1b4NdyyK-PeUqoHuOKodLJwLtC8LCHR/pub?gid=1928632562&single=true&output=csv' \
+            -o "$SCHOOLS_CSV"
 
-      - name: Validate current map files
+          curl --fail --silent --show-error --location \
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGmt0fPRbGXeOcd9T14KEDGDE-YUijbDmq9eI0md-eUeRyi1b4NdyyK-PeUqoHuOKodLJwLtC8LCHR/pub?gid=965146777&single=true&output=csv' \
+            -o "$HEATMAP_CSV"
+
+      - name: Validate downloads
         run: |
-          test -f index.html
-          test -f data/BPSSchoolLocation_3.js
-          echo "Existing map files found."
+          test -s "$SCHOOLS_CSV"
+          test -s "$HEATMAP_CSV"
+          grep -q 'Display Name' "$SCHOOLS_CSV"
+          grep -q 'coordinates' "$SCHOOLS_CSV"
+          grep -q 'geometry' "$HEATMAP_CSV"
+          grep -q 'JOIN_COUNT' "$HEATMAP_CSV"
+
+      - name: Convert CSVs to map data
+        run: python3 scripts/refresh_map.py
+
+      - name: Validate generated map files
+        run: |
+          test -s data/BPSSchoolLocation_3.js
+          test -s data/BPSEnrollment_2.js
+          grep -q 'json_BPSSchoolLocation_3' data/BPSSchoolLocation_3.js
+          grep -q 'json_BPSEnrollment_2' data/BPSEnrollment_2.js
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/BPSSchoolLocation_3.js data/BPSEnrollment_2.js
+
+          if git diff --cached --quiet; then
+            echo "Map data is already up to date."
+          else
+            git commit -m "Refresh map data from published spreadsheet"
+            git push
+          fi
