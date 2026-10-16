@@ -1,0 +1,33 @@
+
+name: Refresh Map Data
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-map
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh map
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Confirm workflow started
+        run: |
+          echo "Map refresh workflow started."
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+
+      - name: Validate current map files
+        run: |
+          test -f index.html
+          test -f data/BPSSchoolLocation_3.js
+          echo "Existing map files found."
