@@ -1,0 +1,107 @@
+/* Boston Public Schools-inspired styling for the LTFP map filters and popups.
+   Loaded after css/filter.css so the original QGIS/noUiSlider styles remain available. */
+:root {
+  --bps-navy: #003b5c;
+  --bps-teal: #008f95;
+  --bps-teal-dark: #006f73;
+  --bps-text: #263746;
+  --bps-muted: #647583;
+  --bps-border: #d5dee5;
+  --bps-panel: #ffffff;
+  --bps-page: #f3f6f8;
+}
+
+#menu {
+  box-sizing: border-box;
+  padding: 16px;
+  background: var(--bps-panel);
+  color: var(--bps-text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+.filterselect,
+.slider-filter {
+  box-sizing: border-box;
+  margin: 0 0 18px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--bps-border);
+}
+
+.filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+
+.filter-title {
+  flex: 1 1 auto;
+  margin: 0;
+  color: var(--bps-navy);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.clear-filter-button {
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border: 1px solid var(--bps-teal);
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--bps-teal-dark);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.clear-filter-button:hover {
+  background: var(--bps-teal);
+  color: #ffffff;
+}
+
+.clear-filter-button:focus-visible,
+#menu select:focus-visible {
+  outline: 3px solid rgba(0, 143, 149, 0.3);
+  outline-offset: 2px;
+}
+
+#menu select {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--bps-border);
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--bps-text);
+  font: inherit;
+  padding: 7px;
+}
+
+#menu select[multiple] { min-height: 70px; }
+#menu select option { padding: 3px 5px; }
+.slider-filter .slider { margin: 12px 4px 18px; }
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip { border-radius: 5px; }
+
+.leaflet-popup-content {
+  color: var(--bps-text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.leaflet-popup-content tr + tr { border-top: 1px solid #e7edf1; }
+.leaflet-popup-content td,
+.leaflet-popup-content th { padding: 5px 7px; text-align: left; }
+
+@media (max-width: 700px) {
+  #menu { padding: 10px; }
+  .filterselect, .slider-filter { margin-bottom: 12px; padding-bottom: 10px; }
+  .filter-heading { gap: 6px; }
+}
