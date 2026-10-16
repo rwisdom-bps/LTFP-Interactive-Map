@@ -25,6 +25,8 @@
   font-size: 13px;
   line-height: 1.45;
   min-width: 400px;
+  max-width: none;
+  overflow-x: auto;
 }
 
 /* Filter groups */
