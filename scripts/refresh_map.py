@@ -60,9 +60,10 @@ for row in school_rows:
     if not display_name and not full_name:
         continue
 
-    raw_coordinates = row.get("coordinates")
+    raw_coordinates = (row.get("coordinates") or "").strip()
     if not raw_coordinates:
-        raise ValueError(f"Missing coordinates for school: {display_name or full_name}")
+        print(f"WARNING: Skipping school with missing coordinates: {display_name or full_name}")
+        continue
 
     coordinates = json.loads(raw_coordinates)
     if (
