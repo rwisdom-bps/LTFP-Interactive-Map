@@ -41,8 +41,9 @@
         <script src="js/tailDT.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/wNumb.js"></script>
-        <script src="data/BPSEnrollment_2.js"></script>
-        <script src="data/BPSSchoolLocation_3.js"></script>
+        <script src="data/Map_Metadata.js"></script>
+        <script src="data/Heatmap_Data.js"></script>
+        <script src="data/Schools_List.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -117,7 +118,7 @@
         });
         layer_BaseMap_1;
         map.addLayer(layer_BaseMap_1);
-        function pop_BPSEnrollment_2(feature, layer) {
+        function pop_Heatmap_Data(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -163,7 +164,7 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_BPSEnrollment_2_0(feature) {
+        function style_Heatmap_Data_0(feature) {
             var rawCount = feature.properties['JOIN_COUNT'];
             var count = (rawCount === '' || rawCount === null || rawCount === undefined)
                 ? NaN
@@ -186,7 +187,7 @@
             }
 
             return {
-                pane: 'pane_BPSEnrollment_2',
+                pane: 'pane_Heatmap_Data',
                 opacity: 1,
                 color: 'rgba(247,247,247,1.0)',
                 dashArray: '',
@@ -200,20 +201,20 @@
             };
         }
 
-        map.createPane('pane_BPSEnrollment_2');
-        map.getPane('pane_BPSEnrollment_2').style.zIndex = 402;
-        map.getPane('pane_BPSEnrollment_2').style['mix-blend-mode'] = 'normal';
-        var layer_BPSEnrollment_2 = new L.geoJson(json_BPSEnrollment_2, {
+        map.createPane('pane_Heatmap_Data');
+        map.getPane('pane_Heatmap_Data').style.zIndex = 402;
+        map.getPane('pane_Heatmap_Data').style['mix-blend-mode'] = 'normal';
+        var layer_Heatmap_Data = new L.geoJson(json_Heatmap_Data, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_BPSEnrollment_2',
-            layerName: 'layer_BPSEnrollment_2',
-            pane: 'pane_BPSEnrollment_2',
-            onEachFeature: pop_BPSEnrollment_2,
-            style: style_BPSEnrollment_2_0,
+            dataVar: 'json_Heatmap_Data',
+            layerName: 'layer_Heatmap_Data',
+            pane: 'pane_Heatmap_Data',
+            onEachFeature: pop_Heatmap_Data,
+            style: style_Heatmap_Data_0,
         });
-        bounds_group.addLayer(layer_BPSEnrollment_2);
-        function pop_BPSSchoolLocation_3(feature, layer) {
+        bounds_group.addLayer(layer_Heatmap_Data);
+        function pop_Schools_List(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -247,8 +248,8 @@
                         <td>' + (feature.properties['Capacity'] !== null ? autolinker.link(feature.properties['Capacity'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">SY24-25 Utilization</th>\
-                        <td>' + (feature.properties['SY24-25 Utilization'] !== null ? autolinker.link(feature.properties['SY24-25 Utilization'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Current Utilization</th>\
+                        <td>' + (feature.properties['Current Utilization'] !== null ? autolinker.link(feature.properties['Current Utilization'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Utilization (5 year avg)</th>\
@@ -298,11 +299,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_BPSSchoolLocation_3_0(feature) {
+        function style_Schools_List_0(feature) {
             switch(String(feature.properties['School Type'] || '').trim()) {
                 case 'ELC':
                     return {
-                pane: 'pane_BPSSchoolLocation_3',
+                pane: 'pane_Schools_List',
                 radius: 6.4,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -318,7 +319,7 @@
                     break;
                 case 'Elementary':
                     return {
-                pane: 'pane_BPSSchoolLocation_3',
+                pane: 'pane_Schools_List',
                 radius: 6.4,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -334,7 +335,7 @@
                     break;
                 case 'Secondary':
                     return {
-                pane: 'pane_BPSSchoolLocation_3',
+                pane: 'pane_Schools_List',
                 radius: 6.4,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -350,29 +351,29 @@
                     break;
             }
         }
-        map.createPane('pane_BPSSchoolLocation_3');
-        map.getPane('pane_BPSSchoolLocation_3').style.zIndex = 403;
-        map.getPane('pane_BPSSchoolLocation_3').style['mix-blend-mode'] = 'normal';
-        var layer_BPSSchoolLocation_3 = new L.geoJson(json_BPSSchoolLocation_3, {
+        map.createPane('pane_Schools_List');
+        map.getPane('pane_Schools_List').style.zIndex = 403;
+        map.getPane('pane_Schools_List').style['mix-blend-mode'] = 'normal';
+        var layer_Schools_List = new L.geoJson(json_Schools_List, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_BPSSchoolLocation_3',
-            layerName: 'layer_BPSSchoolLocation_3',
-            pane: 'pane_BPSSchoolLocation_3',
-            onEachFeature: pop_BPSSchoolLocation_3,
+            dataVar: 'json_Schools_List',
+            layerName: 'layer_Schools_List',
+            pane: 'pane_Schools_List',
+            onEachFeature: pop_Schools_List,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_BPSSchoolLocation_3_0(feature));
+                return L.circleMarker(latlng, style_Schools_List_0(feature));
             },
         });
-        bounds_group.addLayer(layer_BPSSchoolLocation_3);
-        map.addLayer(layer_BPSSchoolLocation_3);
+        bounds_group.addLayer(layer_Schools_List);
+        map.addLayer(layer_Schools_List);
         var overlaysTree = [
-            {label: 'BPS School Location<br /><table><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_ELC0.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Elementary1.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/BPSSchoolLocation_3_Secondary2.png" /></td><td>Secondary</td></tr></table>', layer: layer_BPSSchoolLocation_3},
-            {label: 'BPS Enrollment <br /><table><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_50.png" /></td><td>≤ 4</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_5251.png" /></td><td>5 - 24</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_25802.png" /></td><td>25 - 79</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_801403.png" /></td><td>80 - 139</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_1404.png" /></td><td>> 140</td></tr></table>', layer: layer_BPSEnrollment_2},
+            {label: 'BPS School Location<br /><table><tr><td style="text-align: center;"><img src="legend/Schools_List_ELC0.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/Schools_List_Elementary1.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/Schools_List_Secondary2.png" /></td><td>Secondary</td></tr></table>', layer: layer_Schools_List},
+            {label: 'BPS Enrollment <br /><table><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_50.png" /></td><td>≤ 4</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_5251.png" /></td><td>5 - 24</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_25802.png" /></td><td>25 - 79</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_801403.png" /></td><td>80 - 139</td></tr><tr><td style="text-align: center;"><img src="legend/BPSEnrollment_2_1404.png" /></td><td>> 140</td></tr></table>', layer: layer_Heatmap_Data},
             {label: "Base Map", layer: layer_BaseMap_1},
             ]
         var lay = L.control.layers.tree(null, overlaysTree,{
@@ -384,7 +385,7 @@
             //expandAll: 'Expand all',
             collapsed: false, 
         });
-        map.addLayer(layer_BPSEnrollment_2);
+        map.addLayer(layer_Heatmap_Data);
         lay.addTo(map);
 		document.addEventListener("DOMContentLoaded", function() {
             // set new Layers List height which considers toggle icon
@@ -438,7 +439,7 @@
         });       
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: layer_BPSSchoolLocation_3,
+            layer: layer_Schools_List,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'SCH_NAME'}));
@@ -463,7 +464,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"Enrollment": "int","Utilization (5 year avg)": "int","SY24-25 Utilization": "real","% Multilingual": "real","% SWD": "real","School Type": "str","Neighborhood": "str","Continuum of Services": "str","Building Experience Score (0-4)": "str","Model Space Summary": "str"};
+        var Filters = {"Enrollment": "int","Utilization (5 year avg)": "int","Current Utilization": "real","% Multilingual": "real","% SWD": "real","School Type": "str","Neighborhood": "str","Continuum of Services": "str","Building Experience Score (0-4)": "str","Model Space Summary": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -637,24 +638,24 @@
             });
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_SY2425Utilization = document.createElement("div");
-            div_SY2425Utilization.id = "div_SY2425Utilization";
-            div_SY2425Utilization.className = "slider";
-            document.getElementById("menu").appendChild(div_SY2425Utilization);
-            var lab_SY2425Utilization = document.createElement('div');
-            lab_SY2425Utilization.innerHTML  = 'SY24-25 Utilization: <span id="val_SY2425Utilization"></span>';
-            lab_SY2425Utilization.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_SY2425Utilization);
-            var reset_SY2425Utilization = document.createElement('div');
-            reset_SY2425Utilization.innerHTML = 'clear filter';
-            reset_SY2425Utilization.className = 'filterlabel';
-            lab_SY2425Utilization.className = 'filterlabel';
-            reset_SY2425Utilization.onclick = function() {
-                sel_SY2425Utilization.noUiSlider.reset();
+            var div_CurrentUtilization = document.createElement("div");
+            div_CurrentUtilization.id = "div_CurrentUtilization";
+            div_CurrentUtilization.className = "slider";
+            document.getElementById("menu").appendChild(div_CurrentUtilization);
+            var lab_CurrentUtilization = document.createElement('div');
+            lab_CurrentUtilization.innerHTML  = 'Current Utilization: <span id="val_CurrentUtilization"></span>';
+            lab_CurrentUtilization.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_CurrentUtilization);
+            var reset_CurrentUtilization = document.createElement('div');
+            reset_CurrentUtilization.innerHTML = 'clear filter';
+            reset_CurrentUtilization.className = 'filterlabel';
+            lab_CurrentUtilization.className = 'filterlabel';
+            reset_CurrentUtilization.onclick = function() {
+                sel_CurrentUtilization.noUiSlider.reset();
             };
-            document.getElementById("menu").appendChild(reset_SY2425Utilization);
-            var sel_SY2425Utilization = document.getElementById('div_SY2425Utilization');
-            noUiSlider.create(sel_SY2425Utilization, {
+            document.getElementById("menu").appendChild(reset_CurrentUtilization);
+            var sel_CurrentUtilization = document.getElementById('div_CurrentUtilization');
+            noUiSlider.create(sel_CurrentUtilization, {
                 connect: true,
                 start: [20.8, 223.3],
                 range: {
@@ -662,9 +663,9 @@
                 max: 223.3
                 }
             });
-            sel_SY2425Utilization.noUiSlider.on('update', function (values) {
-            val_SY2425Utilization = document.getElementById('val_SY2425Utilization');
-            val_SY2425Utilization.innerHTML = values.join(' - ');
+            sel_CurrentUtilization.noUiSlider.on('update', function (values) {
+            val_CurrentUtilization = document.getElementById('val_CurrentUtilization');
+            val_CurrentUtilization.innerHTML = values.join(' - ');
                 filterFunc()
             });
             document.getElementById("menu").appendChild(
@@ -969,5 +970,17 @@
                 });
             })();
         </script>
-    </body>
+    
+        <script>
+        (function addDataSourceFooter() {
+            var menu = document.getElementById('menu');
+            if (!menu) return;
+            var footer = document.createElement('div');
+            footer.id = 'dataSourceFooter';
+            footer.textContent = 'Data From: ' + ((window.mapMetadata && window.mapMetadata.dataFrom) || 'Date not set');
+            footer.style.cssText = 'position:sticky;bottom:0;z-index:1000;background:#fff;border-top:1px solid #cbd5dc;padding:10px 12px;font:12px Arial,sans-serif;color:#263746;box-shadow:0 -2px 6px rgba(0,0,0,.08);';
+            menu.appendChild(footer);
+        })();
+        </script>
+</body>
 </html>
