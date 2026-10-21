@@ -181,7 +181,7 @@
 }
 
 /* Subtle border around the PNG swatches for the enrollment legend only */
-.leaflet-control-layers img[src*="BPSEnrollment_2_"] {
+.leaflet-control-layers img[src*="Heatmap_Data_"] {
   box-sizing: content-box;
   border: 1px solid #b8c7d1;
   border-radius: 2px;
