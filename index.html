@@ -22,24 +22,37 @@
             margin: 0;
             overflow: hidden;
         }
-        #map {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
+        /* qgis2web creates #all, #mapWindow, and #menu dynamically. */
+        #all {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
         }
-        /* Keep the filter panel visible in both the full page and embedded/snippet views. */
+        #mapWindow {
+            position: relative !important;
+            flex: 1 1 auto !important;
+            width: auto !important;
+            min-width: 0 !important;
+            height: 100% !important;
+            display: block !important;
+        }
+        #map {
+            position: relative !important;
+            inset: auto !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
         #menu {
             box-sizing: border-box !important;
-            position: absolute !important;
-            z-index: 1100 !important;
-            top: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
+            position: relative !important;
+            flex: 0 0 300px !important;
             width: 300px !important;
             min-width: 300px !important;
             max-width: 300px !important;
-            height: 100vh !important;
+            height: 100% !important;
             overflow-x: hidden !important;
             overflow-y: auto !important;
             padding: 16px !important;
@@ -65,32 +78,26 @@
             width: calc(100% - 16px) !important;
             margin: 12px auto 18px !important;
         }
-        #menu .filterlabel {
-            margin-left: auto !important;
-            margin-right: auto !important;
-            text-align: center !important;
-        }
-        #menu select {
-            margin-left: auto !important;
-            margin-right: auto !important;
-            text-align: center !important;
-        }
+        #menu .filterlabel,
+        #menu select,
         #dataSourceFooter {
+            margin-left: auto !important;
+            margin-right: auto !important;
             text-align: center !important;
         }
         @media (max-width: 700px) {
             #menu {
+                flex-basis: 230px !important;
                 width: 230px !important;
                 min-width: 230px !important;
                 max-width: 230px !important;
                 padding: 10px !important;
             }
         }
-        </style>
+        </style></style>
         <title>LTFP Data Dashboard | Boston Public Schools</title>
     </head>
     <body>
-        <div id="menu"></div>
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
