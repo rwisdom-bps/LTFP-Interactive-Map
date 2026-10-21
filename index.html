@@ -85,6 +85,18 @@
             margin-right: auto !important;
             text-align: center !important;
         }
+        /* Keep the sidebar narrower in embedded and other medium-width layouts. */
+        @media (max-width: 1000px) {
+            #menu {
+                flex-basis: 260px !important;
+                width: 260px !important;
+                min-width: 260px !important;
+                max-width: 260px !important;
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+        }
+
         @media (max-width: 700px) {
             #menu {
                 flex-basis: 230px !important;
