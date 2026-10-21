@@ -247,8 +247,8 @@
                         <td>' + (feature.properties['Capacity'] !== null ? autolinker.link(feature.properties['Capacity'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">SY24-25 Utilization</th>\
-                        <td>' + (feature.properties['SY24-25 Utilization'] !== null ? autolinker.link(feature.properties['SY24-25 Utilization'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Current Utilization</th>\
+                        <td>' + (feature.properties['Current Utilization'] !== null ? autolinker.link(feature.properties['Current Utilization'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Utilization (5 year avg)</th>\
@@ -463,7 +463,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"Enrollment": "int","Utilization (5 year avg)": "int","SY24-25 Utilization": "real","% Multilingual": "real","% SWD": "real","School Type": "str","Neighborhood": "str","Continuum of Services": "str","Building Experience Score (0-4)": "str","Model Space Summary": "str"};
+        var Filters = {"Enrollment": "int","Utilization (5 year avg)": "int","Current Utilization": "real","% Multilingual": "real","% SWD": "real","School Type": "str","Neighborhood": "str","Continuum of Services": "str","Building Experience Score (0-4)": "str","Model Space Summary": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -642,7 +642,7 @@
             div_SY2425Utilization.className = "slider";
             document.getElementById("menu").appendChild(div_SY2425Utilization);
             var lab_SY2425Utilization = document.createElement('div');
-            lab_SY2425Utilization.innerHTML  = 'SY24-25 Utilization: <span id="val_SY2425Utilization"></span>';
+            lab_SY2425Utilization.innerHTML  = 'Current Utilization: <span id="val_SY2425Utilization"></span>';
             lab_SY2425Utilization.className = 'filterlabel';
             document.getElementById("menu").appendChild(lab_SY2425Utilization);
             var reset_SY2425Utilization = document.createElement('div');
