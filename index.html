@@ -46,7 +46,22 @@
         <script src="data/Schools_List.js"></script>
         <script>
         var highlightLayer;
+        var popupCloseTimer = null;
+        function cancelPopupClose() {
+            if (popupCloseTimer) {
+                clearTimeout(popupCloseTimer);
+                popupCloseTimer = null;
+            }
+        }
+        function schedulePopupClose(layer) {
+            cancelPopupClose();
+            popupCloseTimer = setTimeout(function() {
+                if (layer && typeof layer.closePopup === 'function') layer.closePopup();
+                popupCloseTimer = null;
+            }, 350);
+        }
         function highlightFeature(e) {
+            cancelPopupClose();
             highlightLayer = e.target;
             highlightLayer.openPopup();
         }
@@ -121,13 +136,7 @@
         function pop_Heatmap_Data(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
+                    schedulePopupClose(layer);
                 },
                 mouseover: highlightFeature,
             });
@@ -158,9 +167,17 @@
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
+            layer.on('popupopen', function(e) {
+                addClassToPopupIfMedia(content, e.popup);
+                var popupElement = e.popup.getElement();
+                if (popupElement && !popupElement.dataset.hoverCloseBound) {
+                    popupElement.dataset.hoverCloseBound = 'true';
+                    popupElement.addEventListener('mouseenter', cancelPopupClose);
+                    popupElement.addEventListener('mouseleave', function() {
+                        schedulePopupClose(layer);
+                    });
+                }
+            });
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
@@ -217,13 +234,7 @@
         function pop_Schools_List(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
+                    schedulePopupClose(layer);
                 },
                 mouseover: highlightFeature,
             });
@@ -293,9 +304,17 @@
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
+            layer.on('popupopen', function(e) {
+                addClassToPopupIfMedia(content, e.popup);
+                var popupElement = e.popup.getElement();
+                if (popupElement && !popupElement.dataset.hoverCloseBound) {
+                    popupElement.dataset.hoverCloseBound = 'true';
+                    popupElement.addEventListener('mouseenter', cancelPopupClose);
+                    popupElement.addEventListener('mouseleave', function() {
+                        schedulePopupClose(layer);
+                    });
+                }
+            });
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
