@@ -12,9 +12,12 @@
 
 /*custom for menus:*/
 #menu {
+  box-sizing: border-box;
   vertical-align: top;
-  display: inline-block;
-  width: 20%;
+  display: block;
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
 }
 .filterselect{
   
