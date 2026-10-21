@@ -9,6 +9,7 @@ SCHOOLS_CSV = os.environ["SCHOOLS_CSV"]
 HEATMAP_CSV = os.environ["HEATMAP_CSV"]
 
 OUTPUT_DIR = Path("data")
+DATA_FROM = os.environ.get("DATA_FROM", "").strip()
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
@@ -92,7 +93,7 @@ for row in school_rows:
         "Building Age",
         "Enrollment",
         "Capacity",
-        "SY24-25 Utilization",
+        "Current Utilization",
         "Utilization (5 year avg)",
         "Building Experience Score (0-4)",
         "Continuum of Services",
@@ -120,7 +121,7 @@ if not school_features:
 
 schools_geojson = {
     "type": "FeatureCollection",
-    "name": "BPSSchoolLocation_3",
+    "name": "Schools_List",
     "crs": {
         "type": "name",
         "properties": {
@@ -131,8 +132,8 @@ schools_geojson = {
 }
 
 write_js(
-    OUTPUT_DIR / "BPSSchoolLocation_3.js",
-    "json_BPSSchoolLocation_3",
+    OUTPUT_DIR / "Schools_List.js",
+    "json_Schools_List",
     schools_geojson,
 )
 
@@ -169,15 +170,18 @@ if not heatmap_features:
 
 heatmap_geojson = {
     "type": "FeatureCollection",
-    "name": "BPSEnrollment_2",
+    "name": "Heatmap_Data",
     "features": heatmap_features,
 }
 
 write_js(
-    OUTPUT_DIR / "BPSEnrollment_2.js",
-    "json_BPSEnrollment_2",
+    OUTPUT_DIR / "Heatmap_Data.js",
+    "json_Heatmap_Data",
     heatmap_geojson,
 )
 
 print(f"Validated {len(school_features)} public school features.")
 print(f"Validated {len(heatmap_features)} aggregate heatmap polygons.")
+
+# Footer metadata is separate from public school and student data.
+write_js(OUTPUT_DIR / "Map_Metadata.js", "mapMetadata", {"dataFrom": DATA_FROM or "Date not set"})
