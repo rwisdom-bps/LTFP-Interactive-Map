@@ -637,24 +637,24 @@
             });
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_SY2425Utilization = document.createElement("div");
-            div_SY2425Utilization.id = "div_SY2425Utilization";
-            div_SY2425Utilization.className = "slider";
-            document.getElementById("menu").appendChild(div_SY2425Utilization);
-            var lab_SY2425Utilization = document.createElement('div');
-            lab_SY2425Utilization.innerHTML  = 'Current Utilization: <span id="val_SY2425Utilization"></span>';
-            lab_SY2425Utilization.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_SY2425Utilization);
-            var reset_SY2425Utilization = document.createElement('div');
-            reset_SY2425Utilization.innerHTML = 'clear filter';
-            reset_SY2425Utilization.className = 'filterlabel';
-            lab_SY2425Utilization.className = 'filterlabel';
-            reset_SY2425Utilization.onclick = function() {
-                sel_SY2425Utilization.noUiSlider.reset();
+            var div_CurrentUtilization = document.createElement("div");
+            div_CurrentUtilization.id = "div_CurrentUtilization";
+            div_CurrentUtilization.className = "slider";
+            document.getElementById("menu").appendChild(div_CurrentUtilization);
+            var lab_CurrentUtilization = document.createElement('div');
+            lab_CurrentUtilization.innerHTML  = 'Current Utilization: <span id="val_CurrentUtilization"></span>';
+            lab_CurrentUtilization.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_CurrentUtilization);
+            var reset_CurrentUtilization = document.createElement('div');
+            reset_CurrentUtilization.innerHTML = 'clear filter';
+            reset_CurrentUtilization.className = 'filterlabel';
+            lab_CurrentUtilization.className = 'filterlabel';
+            reset_CurrentUtilization.onclick = function() {
+                sel_CurrentUtilization.noUiSlider.reset();
             };
-            document.getElementById("menu").appendChild(reset_SY2425Utilization);
-            var sel_SY2425Utilization = document.getElementById('div_SY2425Utilization');
-            noUiSlider.create(sel_SY2425Utilization, {
+            document.getElementById("menu").appendChild(reset_CurrentUtilization);
+            var sel_CurrentUtilization = document.getElementById('div_CurrentUtilization');
+            noUiSlider.create(sel_CurrentUtilization, {
                 connect: true,
                 start: [20.8, 223.3],
                 range: {
@@ -662,9 +662,9 @@
                 max: 223.3
                 }
             });
-            sel_SY2425Utilization.noUiSlider.on('update', function (values) {
-            val_SY2425Utilization = document.getElementById('val_SY2425Utilization');
-            val_SY2425Utilization.innerHTML = values.join(' - ');
+            sel_CurrentUtilization.noUiSlider.on('update', function (values) {
+            val_CurrentUtilization = document.getElementById('val_CurrentUtilization');
+            val_CurrentUtilization.innerHTML = values.join(' - ');
                 filterFunc()
             });
             document.getElementById("menu").appendChild(
