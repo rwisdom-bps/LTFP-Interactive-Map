@@ -92,7 +92,7 @@ for row in school_rows:
         "Building Age",
         "Enrollment",
         "Capacity",
-        "Current Utilization",
+        "SY24-25 Utilization",
         "Utilization (5 year avg)",
         "Building Experience Score (0-4)",
         "Continuum of Services",
