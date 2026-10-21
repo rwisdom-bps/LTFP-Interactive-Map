@@ -18,6 +18,10 @@
 /* Filter menu panel */
 #menu {
   box-sizing: border-box;
+  box-sizing: border-box;
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
   padding: 16px;
   background: var(--bps-panel);
   color: var(--bps-text);
@@ -198,6 +202,9 @@
 /* Responsive spacing */
 @media (max-width: 700px) {
   #menu {
+    width: 230px;
+    min-width: 230px;
+    max-width: 230px;
     padding: 10px;
   }
 
