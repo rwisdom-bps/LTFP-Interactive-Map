@@ -218,3 +218,16 @@
     gap: 6px;
   }
 }
+
+
+/* Authoritative layout: reserve a real column for the sidebar. */
+html, body { width:100% !important; height:100% !important; margin:0 !important; padding:0 !important; overflow:hidden !important; }
+#all { display:flex !important; flex-direction:row !important; align-items:stretch !important; gap:0 !important; width:100% !important; height:100% !important; margin:0 !important; padding:0 !important; overflow:hidden !important; }
+#mapWindow { display:block !important; float:none !important; flex:1 1 0% !important; width:0 !important; min-width:0 !important; height:100% !important; margin:0 !important; padding:0 !important; }
+#map { position:relative !important; display:block !important; width:100% !important; height:100% !important; margin:0 !important; padding:0 !important; }
+#menu { display:block !important; float:none !important; position:relative !important; flex:0 0 300px !important; width:300px !important; min-width:300px !important; max-width:300px !important; height:100% !important; margin:0 !important; overflow-x:hidden !important; overflow-y:auto !important; align-self:stretch !important; box-sizing:border-box !important; padding:16px !important; background:#fff !important; text-align:center !important; }
+#menu .filterselect, #menu .slider-filter { width:100% !important; max-width:100% !important; margin-left:auto !important; margin-right:auto !important; box-sizing:border-box !important; }
+#menu .filter-heading { justify-content:center !important; }
+#menu .filter-title, #dataSourceFooter { text-align:center !important; }
+#menu .slider, #menu select { margin-left:auto !important; margin-right:auto !important; }
+@media (max-width:700px) { #menu { flex-basis:250px !important; width:250px !important; min-width:250px !important; max-width:250px !important; padding:12px !important; } }
