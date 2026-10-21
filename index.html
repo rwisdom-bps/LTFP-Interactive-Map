@@ -204,7 +204,7 @@
         map.createPane('pane_Heatmap_Data');
         map.getPane('pane_Heatmap_Data').style.zIndex = 402;
         map.getPane('pane_Heatmap_Data').style['mix-blend-mode'] = 'normal';
-        var layer_Heatmap_Data = new L.geoJson(json_Heatmap_Data, {
+        var layer_Heatmap_Data = new L.geoJson((typeof json_Heatmap_Data !== 'undefined' ? json_Heatmap_Data : {type: 'FeatureCollection', features: []}), {
             attribution: '',
             interactive: false,
             dataVar: 'json_Heatmap_Data',
