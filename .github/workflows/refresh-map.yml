@@ -3,6 +3,11 @@ name: Refresh Map Data
 
 on:
   workflow_dispatch:
+    inputs:
+      data_from:
+        description: "Public map date/year label (MM/DD/YY (SYYY-YY))"
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -19,6 +24,7 @@ jobs:
     env:
       SCHOOLS_CSV: /tmp/schools_list.csv
       HEATMAP_CSV: /tmp/heatmap_data.csv
+      DATA_FROM: ${{ inputs.data_from }}
 
     steps:
       - name: Check out repository
@@ -48,17 +54,18 @@ jobs:
 
       - name: Validate generated map files
         run: |
-          test -s data/BPSSchoolLocation_3.js
-          test -s data/BPSEnrollment_2.js
-          grep -q 'json_BPSSchoolLocation_3' data/BPSSchoolLocation_3.js
-          grep -q 'json_BPSEnrollment_2' data/BPSEnrollment_2.js
+          test -s data/Schools_List.js
+          test -s data/Heatmap_Data.js
+          test -s data/Map_Metadata.js
+          grep -q 'json_Schools_List' data/Schools_List.js
+          grep -q 'json_Heatmap_Data' data/Heatmap_Data.js
 
       - name: Commit refreshed data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/BPSSchoolLocation_3.js data/BPSEnrollment_2.js
+          git add data/Schools_List.js data/Heatmap_Data.js data/Map_Metadata.js data/BPSSchoolLocation_3.js data/BPSEnrollment_2.js
 
           if git diff --cached --quiet; then
             echo "Map data is already up to date."
