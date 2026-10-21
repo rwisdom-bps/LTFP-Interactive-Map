@@ -372,8 +372,8 @@
         bounds_group.addLayer(layer_Schools_List);
         map.addLayer(layer_Schools_List);
         var overlaysTree = [
-            {label: 'BPS Schools<br /><table><tr><td style="text-align: center;"><img src="legend/Schools_List_ELC0.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/Schools_List_Elementary1.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/Schools_List_Secondary2.png" /></td><td>Secondary</td></tr></table>', layer: layer_Schools_List},
-            {label: 'Student Density <br /><table><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_50.png" /></td><td>≤ 4</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_5251.png" /></td><td>5 - 24</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_25802.png" /></td><td>25 - 79</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_801403.png" /></td><td>80 - 139</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_1404.png" /></td><td>> 140</td></tr></table>', layer: layer_Heatmap_Data},
+            {label: 'BPS Schools<br /><table><tr><td style="text-align: center;"><img src="legend/Schools_List_ELC.png" /></td><td>ELC</td></tr><tr><td style="text-align: center;"><img src="legend/Schools_List_Elementary.png" /></td><td>Elementary </td></tr><tr><td style="text-align: center;"><img src="legend/Schools_List_Secondary.png" /></td><td>Secondary</td></tr></table>', layer: layer_Schools_List},
+            {label: 'Student Density <br /><table><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_0_4.png" /></td><td>≤ 4</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_5_24.png" /></td><td>5 - 24</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_25_79.png" /></td><td>25 - 79</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_80_139.png" /></td><td>80 - 139</td></tr><tr><td style="text-align: center;"><img src="legend/Heatmap_Data_140_up.png" /></td><td>> 140</td></tr></table>', layer: layer_Heatmap_Data},
             {label: "Base Map", layer: layer_BaseMap_1},
             ]
         var lay = L.control.layers.tree(null, overlaysTree,{
@@ -977,8 +977,8 @@
             if (!menu) return;
             var footer = document.createElement('div');
             footer.id = 'dataSourceFooter';
-            footer.textContent = 'Data From: ' + ((window.mapMetadata && window.mapMetadata.dataFrom) || 'Date not set');
-            footer.style.cssText = 'position:sticky;bottom:0;z-index:1000;background:#fff;border-top:1px solid #cbd5dc;padding:10px 12px;font:12px Arial,sans-serif;color:#263746;box-shadow:0 -2px 6px rgba(0,0,0,.08);';
+            footer.textContent = 'Collection Date: ' + ((window.mapMetadata && window.mapMetadata.dataFrom) || 'Date not set');
+            footer.style.cssText = 'position:sticky;bottom:0;z-index:1000;background:#e8f4f5;border:1px solid #b8dfe1;border-radius:6px;margin:8px;padding:10px 12px;font:12px Arial,sans-serif;color:#003b5c;box-shadow:0 2px 6px rgba(0,0,0,.10);';
             menu.appendChild(footer);
         })();
         </script>
